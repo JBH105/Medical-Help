@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -55,6 +56,9 @@ public class login extends AppCompatActivity {
                 if (Password.length() < 6){
                     password.setError("password must be >=6 characters");
                     return;
+                } else if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches())
+                {
+                    Toast.makeText(getApplicationContext(),"Enter Valid Email address",Toast.LENGTH_LONG).show();
                 }
                 progressBar.setVisibility(View.VISIBLE);
 

@@ -20,6 +20,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class register extends AppCompatActivity {
     TextView loginhere;
@@ -27,18 +29,25 @@ public class register extends AppCompatActivity {
     Button register;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
+    Spinner spinner;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
+        databaseReference = FirebaseDatabase.getInstance().getReference("loginData");
         fullname=findViewById(R.id.fullname);
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
         number=findViewById(R.id.number);
         register=findViewById(R.id.login);
         loginhere=findViewById(R.id.loginhere);
+        spinner=findViewById(R.id.spinner);
+
+        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.abc,R.layout.support_simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         fAuth=FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.progressBar);
@@ -50,7 +59,7 @@ public class register extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String item = spinner.getSelectedItem().toString();
                 String Email=email.getText().toString().trim();
                 String Password=password.getText().toString().trim();
                 if (TextUtils.isEmpty(Email)){
@@ -64,11 +73,16 @@ public class register extends AppCompatActivity {
                 if (Password.length() < 6){
                     password.setError("password must be >=6 characters");
                     return;
-                } else if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches())
+                }
+                else if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches())
                 {
                     Toast.makeText(getApplicationContext(),"Enter Valid Email address",Toast.LENGTH_LONG).show();
                 }
                 progressBar.setVisibility(View.VISIBLE);
+                // Database
+                String id = databaseReference.push().getKey();
+                loginData loginData = new loginData(id, Email, item);
+                databaseReference.child(id).setValue(loginData);
 
                 //register tha users in firebase
 

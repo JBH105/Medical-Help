@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class login extends AppCompatActivity {
     TextView new_account;
@@ -70,15 +76,34 @@ public class login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()){
-//                            FirebaseUser user = FirebaseAuth.getInstance().1
-//                            if (user != null) {
-//                                // User is signed in
-//                                user.
-//                            } else {
-//                                // No user is signed in
-//                            }
-                            Toast.makeText(login.this,"Login is Successfully",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), doctor.class));
+
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            final String userid = user.getUid();
+
+                            DatabaseReference mPostReference = FirebaseDatabase.getInstance().getReference("users");
+                            mPostReference.child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                    //loginData data = (loginData) dataSnapshot.getValue();
+                                    String name = dataSnapshot.child("user_Type").getValue().toString();
+                                    Log.e("Test",  name );
+                                    Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+                                    if (name.equals("Doctor")){
+                                        startActivity(new Intent(getApplicationContext(),doctor.class));
+                                    }else if (name.equals("Laboratory")){
+                                        startActivity(new Intent(getApplicationContext(),laboratory.class));
+                                    }else if (name.equals("Patient")){
+                                        startActivity(new Intent(getApplicationContext(),patient.class));
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+//                          startActivity(new Intent(getApplicationContext(), doctor.class));
                         }else {
                             Toast.makeText(login.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);

@@ -3,202 +3,212 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/darker_gray">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:paddingTop="10sp"
-            android:textStyle="bold"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:text="Appointment Details "/>
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="20dp"-->
+<!--            android:paddingTop="10sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Appointment Details "/>-->
 
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="50dp"
-            app:cardCornerRadius="20dp"
-            android:layout_width="match_parent"
-            app:cardElevation="10dp"
-            android:layout_height="170dp"
-            android:background="@color/colorAccent">
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            app:cardCornerRadius="20dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            app:cardElevation="10dp"-->
+<!--            android:layout_height="170dp"-->
+<!--            android:background="@color/colorAccent">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:text="Name:"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Name:"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
-                android:layout_marginLeft="15dp"
-                android:text="Adress:"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="45dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Adress:"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
-                android:layout_marginLeft="15dp"
-                android:text="Number:"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="75dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Number:"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="105dp"
-                android:layout_marginLeft="15dp"
-                android:text="Time:"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="105dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Time:"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="135dp"
-                android:layout_marginLeft="15dp"
-                android:text="Date:"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="135dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Date:"/>-->
 
-        </androidx.cardview.widget.CardView>
+<!--        </androidx.cardview.widget.CardView>-->
 
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="250dp"
-            app:cardCornerRadius="20dp"
-            android:layout_width="match_parent"
-            app:cardElevation="10dp"
-            android:layout_height="170dp"
-            android:background="@color/colorAccent">
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_marginTop="250dp"-->
+<!--            app:cardCornerRadius="20dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            app:cardElevation="10dp"-->
+<!--            android:layout_height="170dp"-->
+<!--            android:background="@color/colorAccent">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:text="Name:"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Name:"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
-                android:layout_marginLeft="15dp"
-                android:text="Adress:"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="45dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Adress:"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
-                android:layout_marginLeft="15dp"
-                android:text="Number:"/>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="105dp"
-                android:layout_marginLeft="15dp"
-                android:text="Time:"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="135dp"
-                android:layout_marginLeft="15dp"
-                android:text="Date:"/>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="450dp"
-            app:cardCornerRadius="20dp"
-            android:layout_width="match_parent"
-            app:cardElevation="10dp"
-            android:layout_height="170dp"
-            android:background="@color/colorAccent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:text="Name:"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
-                android:layout_marginLeft="15dp"
-                android:text="Adress:"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
-                android:layout_marginLeft="15dp"
-                android:text="Number:"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="75dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Number:"/>-->
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="105dp"
-                android:layout_marginLeft="15dp"
-                android:text="Time:"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="105dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Time:"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="135dp"
-                android:layout_marginLeft="15dp"
-                android:text="Date:"/>
-        </androidx.cardview.widget.CardView>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="135dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Date:"/>-->
 
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="650dp"
-            app:cardCornerRadius="20dp"
-            android:layout_width="match_parent"
-            app:cardElevation="10dp"
-            android:layout_height="170dp"
-            android:background="@color/colorAccent">
+<!--        </androidx.cardview.widget.CardView>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:text="Name:"/>
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_marginTop="450dp"-->
+<!--            app:cardCornerRadius="20dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            app:cardElevation="10dp"-->
+<!--            android:layout_height="170dp"-->
+<!--            android:background="@color/colorAccent">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
-                android:layout_marginLeft="15dp"
-                android:text="Adress:"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Name:"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
-                android:layout_marginLeft="15dp"
-                android:text="Number:"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="45dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Adress:"/>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="75dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Number:"/>-->
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                android:layout_marginLeft="15dp"
-                android:text="Time:"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="105dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Time:"/>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="135dp"
-                android:layout_marginLeft="15dp"
-                android:text="Date:"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="135dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Date:"/>-->
+<!--        </androidx.cardview.widget.CardView>-->
 
-        </androidx.cardview.widget.CardView>
-    </RelativeLayout>
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_marginTop="650dp"-->
+<!--            app:cardCornerRadius="20dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            app:cardElevation="10dp"-->
+<!--            android:layout_height="170dp"-->
+<!--            android:background="@color/colorAccent">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Name:"/>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="45dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Adress:"/>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="75dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Number:"/>-->
+
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="100dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Time:"/>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="135dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:text="Date:"/>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+<!--        -->
+<!--    </RelativeLayout>-->
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints" />
 </ScrollView>

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,8 +21,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class register extends AppCompatActivity {
     TextView loginhere;
@@ -52,16 +57,51 @@ public class register extends AppCompatActivity {
         fAuth=FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.progressBar);
         if (fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), doctor.class));
+
+            FirebaseUser user = fAuth.getCurrentUser();
+
+            DatabaseReference mPostReference = FirebaseDatabase.getInstance().getReference("users");
+            mPostReference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    //loginData data = (loginData) dataSnapshot.getValue();
+                    String name = dataSnapshot.child("user_Type").getValue().toString();
+                    Log.e("Test",  name );
+                    Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+
+                    if (name.equals("Doctor")){
+                        startActivity(new Intent(getApplicationContext(),doctor.class));
+                    }else if (name.equals("Laboratory")){
+                        startActivity(new Intent(getApplicationContext(),laboratory.class));
+                      }
+                    else if (name.equals("Patient")){
+                        startActivity(new Intent(getApplicationContext(),patient.class));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+//            startActivity(new Intent(getApplicationContext(), doctor.class));
             finish();
         }
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String item = spinner.getSelectedItem().toString();
-                String Email=email.getText().toString().trim();
+                final String item = spinner.getSelectedItem().toString();
+                String name=fullname.getText().toString().trim();
+                final String Email=email.getText().toString().trim();
                 String Password=password.getText().toString().trim();
+                String no=number.getText().toString().trim();
+
+                if (TextUtils.isEmpty(name)){
+                    fullname.setError("Name is Required");
+                }
                 if (TextUtils.isEmpty(Email)){
                     email.setError("Email is Required");
                     return;
@@ -69,6 +109,10 @@ public class register extends AppCompatActivity {
                 if (TextUtils.isEmpty(Password)){
                     password.setError("Password is Required");
                     return;
+                }
+
+                if (TextUtils.isEmpty(no)){
+                    number.setError("Number is Required");
                 }
                 if (Password.length() < 6){
                     password.setError("password must be >=6 characters");
@@ -79,10 +123,12 @@ public class register extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Enter Valid Email address",Toast.LENGTH_LONG).show();
                 }
                 progressBar.setVisibility(View.VISIBLE);
-                // Database
-                String id = databaseReference.push().getKey();
-                loginData loginData = new loginData(id, Email, item);
-                databaseReference.child(id).setValue(loginData);
+//                // Database
+//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//                databaseReference.push().getKey();
+//                final String id = user.getUid();
+//                loginData loginData = new loginData(id, Email, item);
+//                databaseReference.child(id).setValue(loginData);
 
                 //register tha users in firebase
 
@@ -91,7 +137,13 @@ public class register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         Toast.makeText(register.this,"User Created",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), doctor.class));
+
+                        FirebaseUser user = task.getResult().getUser();
+                        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                        loginData loginData = new loginData(user.getUid(), Email, item);
+                        mDatabase.child("users").child(user.getUid()).setValue(loginData);
+
+                        startActivity(new Intent(getApplicationContext(), login.class));
                     }else {
                         Toast.makeText(register.this, "Error !" +task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);

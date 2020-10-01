@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.email" >
+    package="com.example.email">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,16 +10,13 @@
         android:label="Medical Application"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".selecte_user_type" >
-        </activity>
-        <activity android:name=".register" />
-        <activity android:name=".laboratory_register" />
-        <activity android:name=".laboratory_login" />
+        android:theme="@style/AppTheme">
+        <activity android:name=".patient"></activity>
+        <activity android:name=".appointment_docter"></activity>
         <activity android:name=".laboratory" />
         <activity android:name=".doctor" />
         <activity android:name=".login" />
-        <activity android:name=".appointment_docter" >
+        <activity android:name=".register">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

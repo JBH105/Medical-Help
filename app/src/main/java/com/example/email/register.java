@@ -42,7 +42,10 @@ public class register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("loginData");
+        try {
+
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
         fullname=findViewById(R.id.fullname);
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
@@ -56,39 +59,48 @@ public class register extends AppCompatActivity {
 
         fAuth=FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.progressBar);
-        if (fAuth.getCurrentUser() != null){
-
-            FirebaseUser user = fAuth.getCurrentUser();
-
-            DatabaseReference mPostReference = FirebaseDatabase.getInstance().getReference("users");
-            mPostReference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    //loginData data = (loginData) dataSnapshot.getValue();
-                    String name = dataSnapshot.child("user_Type").getValue().toString();
-                    Log.e("Test",  name );
-                    Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
-
-                    if (name.equals("Doctor")){
-                        startActivity(new Intent(getApplicationContext(),doctor.class));
-                    }else if (name.equals("Laboratory")){
-                        startActivity(new Intent(getApplicationContext(),laboratory.class));
-                      }
-                    else if (name.equals("Patient")){
-                        startActivity(new Intent(getApplicationContext(),patient.class));
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
-//            startActivity(new Intent(getApplicationContext(), doctor.class));
-            finish();
-        }
+//        if (fAuth.getCurrentUser() != null){
+//
+//            FirebaseUser user = fAuth.getCurrentUser();
+//            Log.e("Test", "Step 1");
+//            DatabaseReference mPostReference = FirebaseDatabase.getInstance().getReference("users");
+//            Log.e("Test", "Step 1.1 - " + user.getUid());
+//            mPostReference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    Log.e("Test", "Step 2");
+//                    //loginData data = (loginData) dataSnapshot.getValue();
+//                    if(dataSnapshot != null && dataSnapshot.hasChildren() &&
+//                            dataSnapshot.child("user_Type") != null && dataSnapshot.child("user_Type").getValue() != null)
+//                    {
+//                        String name = dataSnapshot.child("user_Type").getValue().toString();
+//                        Log.e("Test", name);
+//                        Toast.makeText(getApplicationContext(), name, Toast.LENGTH_SHORT).show();
+//
+//                        if (name.equals("Doctor")) {
+//                            startActivity(new Intent(getApplicationContext(), doctor.class));
+//                        } else if (name.equals("Laboratory")) {
+//                            startActivity(new Intent(getApplicationContext(), laboratory.class));
+//                        } else if (name.equals("Patient")) {
+//                            startActivity(new Intent(getApplicationContext(), patient.class));
+//                        }
+//                    }
+//                    else
+//                    {
+//                        startActivity(new Intent(getApplicationContext(), login.class));
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//                    Log.e("Database error:", error.getMessage());
+//                }
+//            });
+//
+////            startActivity(new Intent(getApplicationContext(), doctor.class));
+//            finish();
+//            Log.e("Test", "Step 3");
+//        }
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +113,7 @@ public class register extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(name)){
                     fullname.setError("Name is Required");
+                    return;
                 }
                 if (TextUtils.isEmpty(Email)){
                     email.setError("Email is Required");
@@ -113,6 +126,7 @@ public class register extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(no)){
                     number.setError("Number is Required");
+                    return;
                 }
                 if (Password.length() < 6){
                     password.setError("password must be >=6 characters");
@@ -159,5 +173,10 @@ public class register extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),login.class));
             }
         });
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

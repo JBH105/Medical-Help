@@ -35,7 +35,7 @@ public class docter_appointment extends Fragment {
       View view= inflater.inflate(R.layout.docter_appointment,container,false);
 
 
-        mRef= FirebaseDatabase.getInstance().getReference("users");
+        mRef= FirebaseDatabase.getInstance().getReference("doctor_appointment_data");
         arrayAdapter= new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,myArrayList);
 
         mylistView=view.findViewById(R.id.listView);
@@ -67,13 +67,17 @@ public class docter_appointment extends Fragment {
 
                     Map<String, String> responseMap = splitToMap(value, ", ", "=");
 
-                    String str="\nDoctor Name: "+responseMap.get("jaydip")
-                            +"\n"+"Gender: "+responseMap.get("cgen")
-                            +"\n"+"City: "+responseMap.get("ccity")
-                            +"\n"+"Education: "+responseMap.get("cedu")
-                            +"\n"+"Experience: "+responseMap.get("cexp")
-                            +"\n"+"Time: "+responseMap.get("ctime")
-                            +"\n"+"Contact No.: "+responseMap.get("cnum")
+                    String str="\nName: "+responseMap.get("name")
+//                            +"\n"+"Gender: "+responseMap.get("cgen")
+                            +"\n"+ "\n"+"Email: "+responseMap.get("email")
+                            +"\n"+ "\n"+"Address: "+responseMap.get("address")
+                            +"\n"+ "\n"+"City: "+responseMap.get("city")
+                            +"\n"+ "\n"+"Zipcode: "+responseMap.get("zipcode")
+                            //+"\n"+"Education: "+responseMap.get("cedu")
+                            //+"\n"+"Experience: "+responseMap.get("cexp")
+                           // +"\n"+"Time: "+responseMap.get("ctime")
+                            +"\n"+ "\n"+"Contact No.: "+responseMap.get("number")
+                            +"\n"+ "\n"+"Date: "+responseMap.get("date")
                             +"\n";
                     myArrayList.add(str);
 

@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bottom_navigation"
-            app:menu="@menu/bottmo_menu"
+            app:menu="@menu/doctor_menu"
             android:layout_alignParentBottom="true"
             android:background="?android:attr/windowBackground"/>
 

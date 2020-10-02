@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/appointment"
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:title="Appintment"/>
+
+<!--    <item-->
+<!--        android:id="@+id/email"-->
+<!--        android:icon="@drawable/ic_baseline_email_24"-->
+<!--        android:title="Email"/>-->
+    <item
+        android:id="@+id/profil"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Profile"/>
+
+</menu>

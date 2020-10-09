@@ -106,10 +106,10 @@ public class register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final String item = spinner.getSelectedItem().toString();
-                String name=fullname.getText().toString().trim();
+                final String name=fullname.getText().toString().trim();
                 final String Email=email.getText().toString().trim();
                 String Password=password.getText().toString().trim();
-                String no=number.getText().toString().trim();
+                final String no=number.getText().toString().trim();
 
                 if (TextUtils.isEmpty(name)){
                     fullname.setError("Name is Required");
@@ -154,7 +154,7 @@ public class register extends AppCompatActivity {
 
                         FirebaseUser user = task.getResult().getUser();
                         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                        loginData loginData = new loginData(user.getUid(), Email, item);
+                        loginData loginData = new loginData(user.getUid(), Email, item, name, no);
                         mDatabase.child("users").child(user.getUid()).setValue(loginData);
 
                         startActivity(new Intent(getApplicationContext(), login.class));

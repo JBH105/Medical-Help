@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/aclonica"
-        android:text="Login To Docter"
+        android:text="Login"
         android:textColor="#EDE8D8"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -38,7 +38,7 @@ public class patient extends AppCompatActivity {
                             selectedFragment = new patient_appointment();
                             break;
                         case R.id.profil:
-                            selectedFragment = new patient_profil();
+                            selectedFragment = new profile();
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();

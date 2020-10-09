@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,22 +24,23 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-public class patient_profil extends Fragment {
+public class patient_profil extends AppCompatActivity {
     TextView textname,textemail,texttype;
     private DatabaseReference firebaseDatabase;
     private FirebaseUser user;
     private  String userID;
-
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.patient_profil, container, false);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.patient_profil);
 
         user= FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase =FirebaseDatabase.getInstance().getReference().child("users");//.child(loginData.getUser_Type());
         userID = user.getUid();
 
-        textemail=view.findViewById(R.id.textemail);
-        texttype=view.findViewById(R.id.texttype);
-        textname=view.findViewById(R.id.textname);
+        textemail=findViewById(R.id.textemail);
+        texttype=findViewById(R.id.texttype);
+        textname=findViewById(R.id.textname);
 
         firebaseDatabase.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -47,13 +49,13 @@ public class patient_profil extends Fragment {
                 if (userprofil !=null){
 
                     String Email = (String) userprofil.get("email");
-                    String User_Type = (String) userprofil.get("user_Type");
-                    String name= (String) userprofil.get("id");
+                    String number = (String) userprofil.get("number");
+                    String name= (String) userprofil.get("name");
 
-                    Log.i("kkl",name+" "+Email+"  "+User_Type);
+                    Log.i("kkl",name+" "+Email+"  "+number);
 
                     textemail.setText(Email);
-                    texttype.setText(User_Type);
+                    texttype.setText(number);
                     textname.setText(name);
 
                 }
@@ -61,12 +63,9 @@ public class patient_profil extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(),"Wrong",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Wrong",Toast.LENGTH_LONG).show();
             }
         });
-
-
-        return view;
 
     }
 }

@@ -1,7 +1,7 @@
 package com.example.email;
 
 public class loginData {
-    String id;
+    String Id;
     String Email;
     String User_Type;
 
@@ -10,13 +10,13 @@ public class loginData {
     }
 
     public loginData(String id, String email, String user_Type) {
-        this.id = id;
+        this.Id = id;
         Email = email;
         User_Type = user_Type;
     }
 
     public String getId() {
-        return id;
+        return Id;
     }
 
     public String getEmail() {

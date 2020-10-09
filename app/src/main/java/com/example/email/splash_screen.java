@@ -69,7 +69,7 @@ public class splash_screen extends AppCompatActivity {
             @Override
             public void run() {
                 //startActivity(new Intent(getApplicationContext(),register.class));
-            }
-        },4000);
+            finish();}
+        },8000);
     }
 }

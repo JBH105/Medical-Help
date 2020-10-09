@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".register"></activity>
         <activity android:name=".patient" />
-        <activity android:name=".appointment_docter" />
         <activity android:name=".laboratory" />
         <activity android:name=".doctor" />
         <activity android:name=".login" />

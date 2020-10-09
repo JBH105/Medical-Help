@@ -35,22 +35,24 @@ public class docter_appointment extends Fragment {
       View view= inflater.inflate(R.layout.docter_appointment,container,false);
 
 
-        mRef= FirebaseDatabase.getInstance().getReference("doctor_appointment_data");
+        mRef= FirebaseDatabase.getInstance().getReference("database_patient");
         arrayAdapter= new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,myArrayList);
 
         mylistView=view.findViewById(R.id.listView);
         mylistView.setAdapter(arrayAdapter);
 
-//        mylistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
+        mylistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
 //                Intent intent = new Intent(getApplicationContext(), list_call.class);
-//                //intent.putExtra("DocInfo", myArrayList.get(position));
+//                intent.putExtra("DocInfo", myArrayList.get(position));
 //                startActivity(intent);
-//                Toast.makeText(getApplicationContext(), myArrayList.get(position), Toast.LENGTH_SHORT).show();
-//            }
-//        });
+                Toast.makeText(getContext(), myArrayList.get(position), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
 
         mRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -58,26 +60,19 @@ public class docter_appointment extends Fragment {
                 String value = dataSnapshot.getValue().toString();
                 value = value.replace("{", "");
                 value = value.replace("}", "");
-//               myArrayList.add(value);
-//               myArrayList.add("**************************");
-//               arrayAdapter.notifyDataSetChanged();
 
 
                 try{
 
                     Map<String, String> responseMap = splitToMap(value, ", ", "=");
 
-                    String str="\nName: "+responseMap.get("name")
-//                            +"\n"+"Gender: "+responseMap.get("cgen")
-                            +"\n"+ "\n"+"Email: "+responseMap.get("email")
-                            +"\n"+ "\n"+"Address: "+responseMap.get("address")
-                            +"\n"+ "\n"+"City: "+responseMap.get("city")
-                            +"\n"+ "\n"+"Zipcode: "+responseMap.get("zipcode")
-                            //+"\n"+"Education: "+responseMap.get("cedu")
-                            //+"\n"+"Experience: "+responseMap.get("cexp")
-                           // +"\n"+"Time: "+responseMap.get("ctime")
-                            +"\n"+ "\n"+"Contact No.: "+responseMap.get("number")
-                            +"\n"+ "\n"+"Date: "+responseMap.get("date")
+                    String str="\nName: "+responseMap.get("aname")
+                            +"\n"+"Email: "+responseMap.get("aemail")
+                            +"\n"+ "Address: "+responseMap.get("aaddress")
+                            +"\n"+"City: "+responseMap.get("acity")
+                            +"\n"+"Zipcode: "+responseMap.get("azip")
+                            +"\n"+ "Contact No.: "+responseMap.get("anumber")
+                            +"\n"+ "Appointment_Date: "+responseMap.get("adate")
                             +"\n";
                     myArrayList.add(str);
 

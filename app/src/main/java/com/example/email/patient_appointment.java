@@ -1,10 +1,15 @@
 package com.example.email;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -14,28 +19,25 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class appointment_docter extends AppCompatActivity {
+public class patient_appointment extends Fragment {
     EditText name,email,number,address,street,city,zipcode,date;
     Button sumbit;
     RadioGroup radioGroup;
     DatabaseReference databaseReference;
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view=  inflater.inflate(R.layout.patient_appointment,container,false);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.appointment_docter);
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("doctor_appointment_data");
-        name=findViewById(R.id.name);
-        email=findViewById(R.id.email);
-        number=findViewById(R.id.number);
-        address=findViewById(R.id.address);
-        street=findViewById(R.id.street);
-        city=findViewById(R.id.city);
-        zipcode=findViewById(R.id.zipcode);
-        date=findViewById(R.id.date);
-        radioGroup=findViewById(R.id.radioGroup);
-        sumbit=findViewById(R.id.submit);
+        databaseReference = FirebaseDatabase.getInstance().getReference("database_patient");
+        name=view.findViewById(R.id.name);
+        email=view.findViewById(R.id.email);
+        number=view.findViewById(R.id.number);
+        address=view.findViewById(R.id.address);
+        street=view.findViewById(R.id.street);
+        city=view.findViewById(R.id.city);
+        zipcode=view.findViewById(R.id.zipcode);
+        date=view.findViewById(R.id.date);
+        radioGroup=view.findViewById(R.id.radioGroup);
+        sumbit=view.findViewById(R.id.submit);
 
         radioGroup.clearCheck();
 
@@ -97,14 +99,17 @@ public class appointment_docter extends AppCompatActivity {
                     return;
                 }else if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches())
                 {
-                    Toast.makeText(getApplicationContext(),"Enter Valid Email address",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Enter Valid Email address",Toast.LENGTH_LONG).show();
                 }
 
                 String id = databaseReference.push().getKey();
-                doctor_appointment_data doctor_appointment_Data = new
-                        doctor_appointment_data(id ,Name, Email, Number, Address, Street, City, Zipcode, Date);
-                databaseReference.child(id).setValue(doctor_appointment_Data);
+                database_patient database = new database_patient(id, Name, Email, Number, Address, Street, City, Zipcode, Date);
+                databaseReference.child(id).setValue(database);
+
+                Toast.makeText(getContext(),"confirm appointment",Toast.LENGTH_LONG).show();
+
             }
         });
+   return  view;
     }
 }

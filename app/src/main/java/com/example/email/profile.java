@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +26,13 @@ public class profile extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(),patient_profil.class));
+            }
+        });
+
+        appointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), patient_appointment_details.class));
             }
         });
         return  view;

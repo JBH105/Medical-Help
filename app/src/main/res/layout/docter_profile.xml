@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_person_24"/>
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/textname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
            android:layout_marginLeft="20dp"
@@ -51,6 +51,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_email_24"/>
                 <TextView
+                    android:id="@+id/textemail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -68,6 +69,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_phone_24"/>
                 <TextView
+                    android:id="@+id/textnumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"

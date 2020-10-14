@@ -1,65 +1,63 @@
 package com.example.email;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class docter_appointment extends Fragment {
-    ArrayList<String> myArrayList =new ArrayList<>();
-    ListView mylistView;
-    DatabaseReference mRef;
+public class patient_appointment_details extends AppCompatActivity {
+    TextView name,email,number,date;
+    DatabaseReference databaseReference;
+    FirebaseAuth firebaseAuth;
+    ListView listView;
+    ArrayList<String> arrayList = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-      View view= inflater.inflate(R.layout.docter_appointment,container,false);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.patient_appointment_details);
 
+        name=findViewById(R.id.name);
+        email=findViewById(R.id.email);
+        number=findViewById(R.id.number);
+        date=findViewById(R.id.date);
+        listView=findViewById(R.id.listView);
 
-        mRef= FirebaseDatabase.getInstance().getReference().child("users").child("users_appointment");
-        arrayAdapter= new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,myArrayList);
+        firebaseAuth= FirebaseAuth.getInstance();
+        databaseReference =FirebaseDatabase.getInstance().getReference().child("users_appointment");
+        FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        mylistView=view.findViewById(R.id.listView);
-        mylistView.setAdapter(arrayAdapter);
+        arrayAdapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,arrayList);
+        listView.setAdapter(arrayAdapter);
 
-        mylistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-//                Intent intent = new Intent(getApplicationContext(), list_call.class);
-//                intent.putExtra("DocInfo", myArrayList.get(position));
-//                startActivity(intent);
-                Toast.makeText(getContext(), myArrayList.get(position), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
-        mRef.addChildEventListener(new ChildEventListener() {
+        databaseReference.child(user.getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 String value = dataSnapshot.getValue().toString();
                 value = value.replace("{", "");
                 value = value.replace("}", "");
+//                Log.i("abc",dataSnapshot.toString());
 
 
                 try{
@@ -74,10 +72,10 @@ public class docter_appointment extends Fragment {
                             +"\n"+ "Contact No.: "+responseMap.get("anumber")
                             +"\n"+ "Appointment_Date: "+responseMap.get("adate")
                             +"\n";
-                    myArrayList.add(str);
+                    arrayList.add(str);
 
                 }catch (Exception e) {e.printStackTrace();
-                    myArrayList.add(e.getMessage());
+                    arrayList.add(e.getMessage());
                 }
 
                 arrayAdapter.notifyDataSetChanged();
@@ -116,7 +114,37 @@ public class docter_appointment extends Fragment {
             }
         });
 
-
-        return view;
+//        databaseReference.child(user.getUid()).addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//                String value = snapshot.getValue().toString();
+//                arrayList.add(value);
+//                arrayAdapter.notifyDataSetChanged();
+//
+//                Log.i("abc",value);
+//
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
     }
 }

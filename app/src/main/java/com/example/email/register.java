@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class register extends AppCompatActivity {
     TextView loginhere;
-    EditText fullname,email,password,number;
+    EditText fullname,email,password,number,building,area,lan,city;
     Button register;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
@@ -46,6 +46,10 @@ public class register extends AppCompatActivity {
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
         number=findViewById(R.id.number);
+        building=findViewById(R.id.building);
+        area=findViewById(R.id.area);
+        lan=findViewById(R.id.lan);
+        city=findViewById(R.id.city);
         register=findViewById(R.id.login);
         loginhere=findViewById(R.id.loginhere);
         spinner=findViewById(R.id.spinner);
@@ -106,6 +110,10 @@ public class register extends AppCompatActivity {
                 final String Email=email.getText().toString().trim();
                 String Password=password.getText().toString().trim();
                 final String no=number.getText().toString().trim();
+                final String bui = building.getText().toString().trim();
+                final String are = area.getText().toString().trim();
+                final String la = lan.getText().toString().trim();
+                final String ci = city.getText().toString().trim();
 
                 if (TextUtils.isEmpty(name)){
                     fullname.setError("Name is Required");
@@ -120,14 +128,28 @@ public class register extends AppCompatActivity {
                     return;
                 }
 
-                if (TextUtils.isEmpty(no)){
+                if (TextUtils.isEmpty(no) || no.length() < 10){
                     number.setError("Number is Required");
                     return;
                 }
                 if (Password.length() < 6){
                     password.setError("password must be >=6 characters");
                     return;
+                }if (TextUtils.isEmpty(bui)){
+                    building.setError("Required");
+                    return;
                 }
+                if (TextUtils.isEmpty(are)){
+                    area.setError("Required");
+                    return;
+                }if (TextUtils.isEmpty(la)){
+                    lan.setError("Required");
+                    return;
+                }if (TextUtils.isEmpty(ci)){
+                    city.setError("Required");
+                    return;
+                }
+
                 else if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches())
                 {
                     Toast.makeText(getApplicationContext(),"Enter Valid Email address",Toast.LENGTH_LONG).show();
@@ -150,7 +172,7 @@ public class register extends AppCompatActivity {
 
                         FirebaseUser user = task.getResult().getUser();
                         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                        loginData loginData = new loginData(user.getUid(), Email, item, name, no);
+                        loginData loginData = new loginData(user.getUid(), Email, item, name, no, bui, are, la, ci);
                         mDatabase.child("users").child(user.getUid()).setValue(loginData);
 
                         startActivity(new Intent(getApplicationContext(), login.class));

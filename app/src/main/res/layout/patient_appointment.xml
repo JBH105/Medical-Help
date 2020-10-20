@@ -7,11 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".patient_appointment">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
-    android:id="@+id/patient_appointmentConstraint">
 
     <TextView
         android:id="@+id/textView3"
@@ -81,6 +76,8 @@
         android:layout_marginRight="16dp"
         android:background="#fff"
         android:ems="10"
+        android:maxLength="10"
+        android:digits="0123456789"
         android:fontFamily="@font/aclonica"
         android:hint="Phone Number"
         android:inputType="number"
@@ -92,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/email"
         app:layout_constraintVertical_bias="0.029999971" />
 
-    <EditText
+    <TextView
         android:id="@+id/date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -168,7 +165,8 @@
         android:layout_marginRight="16dp"
         android:background="#fff"
         android:padding="10dp"
-        android:text="Choose Doctor"
+        android:hint="Choose Doctor"
+        android:fontFamily="@font/aclonica"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -177,9 +175,6 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include layout="@layout/choose_doctor"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

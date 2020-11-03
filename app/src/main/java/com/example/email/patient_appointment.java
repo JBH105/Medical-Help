@@ -7,18 +7,21 @@ import androidx.fragment.app.Fragment;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,10 +34,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class patient_appointment extends Fragment {
-    EditText name,email,number,address,street,city,zipcode;
+    EditText name,email,number;
     TextView choose_doctor,date;
     Button sumbit;
-    RadioGroup radioGroup;
+    Spinner gender,slot;
     DatabaseReference databaseReference;
     FirebaseAuth auth;
 //    ArrayList<String> myArrayList =new ArrayList<>();
@@ -52,14 +55,19 @@ public class patient_appointment extends Fragment {
         name=view.findViewById(R.id.name);
         email=view.findViewById(R.id.email);
         number=view.findViewById(R.id.number);
-//        address=view.findViewById(R.id.address);
-//        street=view.findViewById(R.id.street);
-//        city=view.findViewById(R.id.city);
-//        zipcode=view.findViewById(R.id.zipcode);
         date=view.findViewById(R.id.date);
-        radioGroup=view.findViewById(R.id.radioGroup);
         sumbit=view.findViewById(R.id.submit);
         choose_doctor=view.findViewById(R.id.choose_doctor);
+        gender=view.findViewById(R.id.gender);
+        slot=view.findViewById(R.id.slot);
+
+        //spinner
+        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(getContext(),R.array.gender,R.layout.support_simple_spinner_dropdown_item);
+        gender.setAdapter(adapter);
+
+        ArrayAdapter<CharSequence> Adapter=ArrayAdapter.createFromResource(getContext(),R.array.slot,R.layout.support_simple_spinner_dropdown_item);
+        slot.setAdapter(Adapter);
+
 
         choose_doctor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,11 +179,13 @@ public class patient_appointment extends Fragment {
         sumbit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String doctor =choose_doctor.getText().toString().trim();
+                String Gender = gender.getSelectedItem().toString();
+                String Slot = slot.getSelectedItem().toString();
                 String Name = name.getText().toString().trim();
                 String Email = email.getText().toString().trim();
                 String Number = number.getText().toString().trim();
                 String Date = date.getText().toString().trim();
-
 
                 if (TextUtils.isEmpty(Name)){
                     name.setError("Enter name");
@@ -189,21 +199,25 @@ public class patient_appointment extends Fragment {
                     number.setError("Enter Number");
                     return;
                 }
+                if (TextUtils.isEmpty(doctor)){
+                    choose_doctor.setError("Choose Doctor");
+                    return;
+                }
 
                 if (TextUtils.isEmpty(Date)){
                     date.setError("Enter date");
                     return;
-                }else if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches())
+                }
+
+                else if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches())
                 {
                     Toast.makeText(getContext(),"Enter Valid Email address",Toast.LENGTH_LONG).show();
                     return;
                 }
 
-
-
                 FirebaseUser user = auth.getCurrentUser();
                 String id = databaseReference.push().getKey();
-                database_patient database = new database_patient(Name, Email, Number, Date);
+                database_patient database = new database_patient(Name, Email, Number, Date, doctor, Gender, Slot);
                 databaseReference.child("users_appointment").child(user.getUid()).child(id).setValue(database);
 
                 Toast.makeText(getContext(),"confirm appointment",Toast.LENGTH_LONG).show();

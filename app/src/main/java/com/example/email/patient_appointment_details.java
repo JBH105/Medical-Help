@@ -66,11 +66,12 @@ public class patient_appointment_details extends AppCompatActivity {
 
                     String str="\nName: "+responseMap.get("aname")
                             +"\n"+"Email: "+responseMap.get("aemail")
-//                            +"\n"+ "Address: "+responseMap.get("aaddress")
-//                            +"\n"+"City: "+responseMap.get("acity")
-//                            +"\n"+"Zipcode: "+responseMap.get("azip")
                             +"\n"+ "Contact No.: "+responseMap.get("anumber")
+                            +"\n"+ "Genger: "+responseMap.get("agender")
+                            +"\n"+""+responseMap.get("adoctor")
+
                             +"\n"+ "Appointment_Date: "+responseMap.get("adate")
+                            +"\n"+"Select Slot: "+responseMap.get("aslot")
                             +"\n";
                     arrayList.add(str);
 

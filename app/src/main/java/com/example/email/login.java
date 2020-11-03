@@ -94,6 +94,9 @@ public class login extends AppCompatActivity {
                                     }else if (name.equals("Patient")){
                                         startActivity(new Intent(getApplicationContext(),patient.class));
                                     }
+                                    else {
+                                        Toast.makeText(getApplicationContext(),"Select User Type",Toast.LENGTH_LONG).show();
+                                    }
                                 }
 
                                 @Override

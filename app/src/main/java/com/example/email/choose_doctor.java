@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,6 +30,7 @@ import java.util.Map;
 
 public class choose_doctor extends AppCompatActivity {
 
+    ImageView bake;
     DatabaseReference databaseReference;
     FirebaseAuth auth;
     ArrayList<String> myArrayList =new ArrayList<>();
@@ -36,6 +40,14 @@ public class choose_doctor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_doctor);
+        bake=findViewById(R.id.back);
+
+        bake.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),patient_appointment.class));
+            }
+        });
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -115,5 +127,27 @@ public class choose_doctor extends AppCompatActivity {
                 return map;
             }
         });
+
+    }
+
+    //dialogbox
+    public void  onBackPressed(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(choose_doctor.this);
+        builder.setMessage("Do you really want to close the app ?");
+        builder.setCancelable(true);
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

@@ -27,7 +27,7 @@ public class patient extends AppCompatActivity {
         BottomNavigationView bottomnav=findViewById(R.id.bottom_navigation);
         bottomnav.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new patient_appointment()).commit();
+                new patient_home()).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -38,6 +38,9 @@ public class patient extends AppCompatActivity {
                     Fragment selectedFragment = null;
 
                     switch (item.getItemId()) {
+                        case R.id.home:
+                            selectedFragment = new patient_home();
+                            break;
                         case R.id.appointment:
                             selectedFragment = new patient_appointment();
                             break;

@@ -22,9 +22,9 @@ public class doctor extends AppCompatActivity {
         setContentView(R.layout.doctor);
 
         //bottomnavigation
-        BottomNavigationView bottomnav=findViewById(R.id.bottom_navigation_doctor);
+        BottomNavigationView bottomnav=findViewById(R.id.bottom_navigation1);
         bottomnav.setOnNavigationItemSelectedListener(navListener);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_doctor,
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,
                 new docter_patient()).commit();
     }
 
@@ -33,7 +33,7 @@ public class doctor extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                    Fragment selectedFragment = null;
+                    Fragment selectedFragment = new docter_patient();
 
                     switch (item.getItemId()) {
                         case R.id.patient:
@@ -49,7 +49,7 @@ public class doctor extends AppCompatActivity {
                             selectedFragment = new docter_profile();
                             break;
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1, selectedFragment).commit();
                     return true;
 
                 }

@@ -22,9 +22,9 @@ public class doctor extends AppCompatActivity {
         setContentView(R.layout.doctor);
 
         //bottomnavigation
-        BottomNavigationView bottomnav=findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomnav=findViewById(R.id.bottom_navigation_doctor);
         bottomnav.setOnNavigationItemSelectedListener(navListener);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_doctor,
                 new docter_patient()).commit();
     }
 

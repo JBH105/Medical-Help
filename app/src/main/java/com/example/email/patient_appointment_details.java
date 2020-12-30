@@ -38,10 +38,10 @@ public class patient_appointment_details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.patient_appointment_details);
 
-        name=findViewById(R.id.name);
-        email=findViewById(R.id.email);
-        number=findViewById(R.id.number);
-        date=findViewById(R.id.date);
+//        name=findViewById(R.id.name);
+//        email=findViewById(R.id.email);
+//        number=findViewById(R.id.number);
+//        date=findViewById(R.id.date);
         listView=findViewById(R.id.listView);
 
         firebaseAuth= FirebaseAuth.getInstance();
@@ -114,38 +114,5 @@ public class patient_appointment_details extends AppCompatActivity {
                 return map;
             }
         });
-
-//        databaseReference.child(user.getUid()).addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//                String value = snapshot.getValue().toString();
-//                arrayList.add(value);
-//                arrayAdapter.notifyDataSetChanged();
-//
-//                Log.i("abc",value);
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
     }
 }

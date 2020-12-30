@@ -2,12 +2,14 @@ package com.example.email;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -177,6 +179,7 @@ public class patient_appointment extends Fragment {
 //        });
 
         sumbit.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 String doctor =choose_doctor.getText().toString().trim();
@@ -199,6 +202,10 @@ public class patient_appointment extends Fragment {
                     number.setError("Enter Number");
                     return;
                 }
+                if (Gender.equals("Select Gender")){
+                    Toast.makeText(getContext(), "Select Gender", Toast.LENGTH_SHORT).show();
+                        return;
+                }
                 if (TextUtils.isEmpty(doctor)){
                     choose_doctor.setError("Choose Doctor");
                     return;
@@ -206,6 +213,10 @@ public class patient_appointment extends Fragment {
 
                 if (TextUtils.isEmpty(Date)){
                     date.setError("Enter date");
+                    return;
+                }
+                if (Slot.equals("Select Slot")){
+                    Toast.makeText(getContext(), "Select Slot", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -226,6 +237,9 @@ public class patient_appointment extends Fragment {
                 email.setText("");
                 number.setText("");
                 date.setText("");
+                slot.setEnabled(Boolean.parseBoolean(""));
+                choose_doctor.setText("");
+                gender.setEnabled(Boolean.parseBoolean(""));
 
             }
         });

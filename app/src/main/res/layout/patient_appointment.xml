@@ -80,10 +80,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:background="#fff"
-                android:clickable="true"
                 android:drawSelectorOnTop="true"
                 android:entries="@array/gender"
-                android:padding="10dp"
                 android:layout_marginTop="20dp"
                 />
             <TextView
@@ -123,7 +121,6 @@
                 android:clickable="true"
                 android:drawSelectorOnTop="true"
                 android:entries="@array/slot"
-                android:padding="10dp"
                 android:layout_marginTop="20dp"
                 />
 

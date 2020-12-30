@@ -15,11 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +32,7 @@ public class docter_appointment extends Fragment {
     ArrayList<String> myArrayList =new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
     ListView mylistView;
+    FirebaseAuth firebaseAuth;
     DatabaseReference mRef;
 
 
@@ -36,11 +40,14 @@ public class docter_appointment extends Fragment {
       View view= inflater.inflate(R.layout.docter_appointment,container,false);
 
 
-        mRef= FirebaseDatabase.getInstance().getReference().child("users_appointment");
-        arrayAdapter= new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,myArrayList);
+      firebaseAuth = FirebaseAuth.getInstance();
+        mRef= FirebaseDatabase.getInstance().getReference();
+        arrayAdapter= new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,myArrayList);
 
         mylistView=view.findViewById(R.id.listView);
         mylistView.setAdapter(arrayAdapter);
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
 
         mylistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -53,9 +60,7 @@ public class docter_appointment extends Fragment {
             }
         });
 
-
-
-        mRef.addChildEventListener(new ChildEventListener() {
+        mRef.child("users_appointment").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 String value = dataSnapshot.getValue().toString();
